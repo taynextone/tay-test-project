@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pflegefachlicher Precheck bei Intensivfällen</title>
+  <meta name="description" content="Pflegefachlicher Precheck von Intensivakten für Anwälte – strukturierte Vorprüfung auf Plausibilität, Widersprüche und pflegepraktische Stimmigkeit vor medizinischer Begutachtung." />
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #18202a;
+      --muted: #5f6b7a;
+      --line: #d9e0e8;
+      --accent: #123b7a;
+      --accent-2: #0e2d5c;
+      --soft: #edf3ff;
+      --ok: #eaf6ee;
+      --shadow: 0 10px 30px rgba(18, 32, 58, 0.08);
+      --radius: 18px;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eef4ff 100%);
+      border: 1px solid #d8e4ff;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 44px 28px;
+      margin-top: 12px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: #eaf1ff;
+      border: 1px solid #cfe0ff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      font-size: 1.14rem;
+      color: #334155;
+      max-width: 760px;
+      margin: 0 0 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 22px;
+      align-items: start;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .cta-box {
+      background: linear-gradient(180deg, #173f82 0%, #0f2d5b 100%);
+      color: #fff;
+      border: none;
+    }
+
+    .cta-box h2,
+    .cta-box p,
+    .cta-box a,
+    .cta-box li { color: #fff; }
+
+    .cta-box a {
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 16px;
+      background: #fff;
+      color: var(--accent-2) !important;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .quickfacts {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+    }
+
+    .quickfacts li {
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .section h2 {
+      font-size: 1.55rem;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .muted { color: var(--muted); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    ul.clean {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    ul.clean li { margin: 8px 0; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      background: var(--soft);
+      border: 1px solid #dbe7ff;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .step-number {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .result-box {
+      background: var(--ok);
+      border: 1px solid #cfe7d6;
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid var(--line);
+      padding: 16px 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .footer {
+      margin-top: 34px;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      font-size: 0.97rem;
+    }
+
+    .footer h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .fineprint {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .grid-2,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 34px 20px;
+      }
+
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Für Anwälte bei Intensivfällen</div>
+      <h1>Pflegefachlicher Precheck von Intensivakten<br />vor medizinischer Begutachtung</h1>
+      <p class="lead">
+        Wenn in einer Akte pflegerische Abläufe dokumentiert sind, entscheidet nicht nur das, was geschrieben wurde –
+        sondern auch, ob diese Darstellung aus Sicht der realen Intensivpflege überhaupt plausibel, stimmig und praktisch umsetzbar ist.
+      </p>
+      <p class="lead">
+        Ich prüfe Intensivakten auf <strong>pflegerische Plausibilität</strong>, <strong>erkennbare Widersprüche</strong> und
+        <strong>pflegepraktische Tragfähigkeit</strong> – als strukturierte Vorprüfung, bevor weitere Kosten durch medizinische Begutachtung entstehen.
+      </p>
+
+      <div class="hero-grid">
+        <div class="card">
+          <h2>Wofür dieser Precheck gedacht ist</h2>
+          <ul class="clean">
+            <li>Intensivpflege, Beatmungspflege oder außerklinische Intensivversorgung</li>
+            <li>widersprüchliche oder lückenhafte Pflegedokumentation</li>
+            <li>unklare Pflegeabläufe oder fragwürdige Darstellung pflegerischer Maßnahmen</li>
+            <li>Vorprüfung vor Mandatsannahme oder vor Beauftragung eines medizinischen Gutachters</li>
+          </ul>
+        </div>
+
+        <aside class="card cta-box">
+          <h2>Unterlagen senden</h2>
+          <p>
+            Senden Sie die vorhandenen Unterlagen unverbindlich zur ersten Sichtung.
+            Ich melde zurück, ob der Fall für einen pflegefachlichen Precheck geeignet ist.
+          </p>
+          <a href="mailto:Saponja@intensivgutachter.de?subject=Anfrage%20pflegefachlicher%20Precheck">Saponja@intensivgutachter.de</a>
+          <a class="cta-button" href="mailto:Saponja@intensivgutachter.de?subject=Anfrage%20pflegefachlicher%20Precheck">Jetzt Anfrage senden</a>
+          <ul class="quickfacts">
+            <li><strong>Format:</strong> strukturierte schriftliche Ersteinschätzung</li>
+            <li><strong>Fokus:</strong> pflegepraktische Plausibilität</li>
+            <li><strong>Abgrenzung:</strong> keine medizinische oder rechtliche Bewertung</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid-2 section">
+      <div class="card">
+        <h2>Was geprüft wird</h2>
+        <ul class="clean">
+          <li>Plausibilität der dokumentierten Pflegehandlungen</li>
+          <li>praktische Durchführbarkeit im realen Intensivalltag</li>
+          <li>Widersprüche zwischen Dokumentation und Versorgungspraxis</li>
+          <li>auffällige Lücken, Unstimmigkeiten oder pflegerisch fragwürdige Abläufe</li>
+          <li>ob die pflegerische Darstellung insgesamt tragfähig wirkt</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Was nicht geprüft wird</h2>
+        <ul class="clean">
+          <li>keine medizinische Begutachtung</li>
+          <li>keine rechtliche Bewertung</li>
+          <li>kein gerichtliches Sachverständigengutachten</li>
+          <li>keine Bewertung ärztlicher Kausalität oder Haftung</li>
+        </ul>
+        <p class="muted">
+          Es handelt sich bewusst um eine <strong>pflegefachliche Vorprüfung</strong> aus Sicht der praktischen Intensivversorgung.
+        </p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Was Sie erhalten</h2>
+      <p>
+        Sie erhalten eine <strong>kurze strukturierte pflegefachliche Einschätzung</strong> mit Fokus auf die Frage,
+        ob die Akte aus Sicht der realen Pflegepraxis in sich schlüssig wirkt oder erkennbare Brüche zeigt.
+      </p>
+      <div class="result-box">
+        <strong>Typische Bestandteile:</strong>
+        <ul class="clean">
+          <li>pflegerische Plausibilitätsbewertung</li>
+          <li>zentrale Widersprüche oder Auffälligkeiten</li>
+          <li>kritische Dokumentationsstellen</li>
+          <li>pflegepraktische Einordnung der Aktenlage</li>
+          <li>Einschätzung, ob eine vertiefte weitere Prüfung sinnvoll erscheint</li>
+        </ul>
+      </div>
+      <p class="muted" style="margin-top:16px;">
+        Mögliche Kurzfazit-Kategorien: <strong>pflegerisch plausibel</strong>, <strong>pflegerisch fraglich</strong>,
+        <strong>pflegerisch nicht schlüssig</strong>, <strong>vertiefte Prüfung empfehlenswert</strong>.
+      </p>
+    </section>
+
+    <section class="card section">
+      <h2>Warum dieser Precheck sinnvoll sein kann</h2>
+      <p>
+        In vielen Intensivfällen liegt die eigentliche Schwäche einer Akte nicht zuerst im medizinischen Detail,
+        sondern bereits in der pflegepraktischen Stimmigkeit. Genau dort kann eine frühe Vorprüfung helfen.
+      </p>
+      <ul class="clean">
+        <li>fragwürdige Fälle früher erkennen</li>
+        <li>unnötige Gutachterkosten vermeiden</li>
+        <li>Akten gezielter für die weitere Bearbeitung vorbereiten</li>
+        <li>pflegerische Schwachstellen klarer sichtbar machen</li>
+      </ul>
+    </section>
+
+    <section class="card section">
+      <h2>Ablauf</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">Schritt 1</div>
+          <strong>Unterlagen senden</strong>
+          <div class="muted">Per E-Mail mit kurzer Einordnung des Falls.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">Schritt 2</div>
+          <strong>Erste Sichtung</strong>
+          <div class="muted">Prüfung, ob der Fall für einen pflegefachlichen Precheck geeignet ist.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">Schritt 3</div>
+          <strong>Rückmeldung</strong>
+          <div class="muted">Info zu Umfang, Bearbeitungszeit und Konditionen.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">Schritt 4</div>
+          <strong>Precheck</strong>
+          <div class="muted">Schriftliche strukturierte Ersteinschätzung.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section faq">
+      <h2>Häufige Fragen</h2>
+
+      <details>
+        <summary>Ist das ein gerichtliches Gutachten?</summary>
+        <p>Nein. Es handelt sich ausdrücklich nicht um ein gerichtliches Sachverständigengutachten, sondern um eine pflegefachliche Vorprüfung.</p>
+      </details>
+
+      <details>
+        <summary>Ist das eine medizinische Bewertung?</summary>
+        <p>Nein. Geprüft wird die pflegepraktische Plausibilität von Dokumentation und Ablauf, nicht die medizinische Diagnose oder ärztliche Kausalität.</p>
+      </details>
+
+      <details>
+        <summary>Für welche Fälle ist das besonders sinnvoll?</summary>
+        <p>Vor allem bei Intensiv- und Beatmungsfällen mit widersprüchlicher Dokumentation, unklaren Pflegeabläufen oder Zweifeln an der praktischen Umsetzbarkeit.</p>
+      </details>
+
+      <details>
+        <summary>Wie erfolgt die Beauftragung?</summary>
+        <p>Zunächst per E-Mail mit Unterlagen zur Sichtung. Danach erfolgt die Rückmeldung, ob der Fall geeignet ist und zu welchen Konditionen eine Vorprüfung möglich ist.</p>
+      </details>
+    </section>
+
+    <section class="card section">
+      <h2>Kontakt</h2>
+      <p>
+        Für Anfragen und Unterlagen:<br />
+        <strong><a href="mailto:Saponja@intensivgutachter.de">Saponja@intensivgutachter.de</a></strong>
+      </p>
+      <p class="muted">
+        Wenn Sie möchten, kann zusätzlich eine kurze Fallschilderung in der E-Mail helfen, die Eignung der Unterlagen schneller einzuordnen.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <h3>Impressum</h3>
+      <p>
+        Jurica Šaponja<br />
+        Hahnenfahrtsstraße 18<br />
+        76530 Baden-Baden<br />
+        Deutschland
+      </p>
+      <p>
+        E-Mail: <a href="mailto:Saponja@intensivgutachter.de">Saponja@intensivgutachter.de</a>
+      </p>
+
+      <h3>Datenschutz</h3>
+      <p class="fineprint">
+        Diese Website verwendet kein Tracking, keine Analyse-Tools und keine Marketing-Cookies.
+        Beim Besuch der Seite werden nur technisch notwendige Server-Logfiles durch den Hostinganbieter verarbeitet.
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
